@@ -1,0 +1,256 @@
+/* Tokens. Dark set follows GitHub's own theme setting. */
+html.ghd {
+  --ghd-bg: #f4f4f5;
+  --ghd-win: #ffffff;
+  --ghd-ink: #18181b;
+  --ghd-muted: #71717a;
+  --ghd-line: rgba(24, 24, 27, 0.07);
+  --ghd-hover: #f4f4f5;
+  --ghd-pill: #f4f4f5;
+  --ghd-accent: #0a84ff;
+  --ghd-skel: #e4e4e7;
+  --ghd-shadow: 0 0 0 1px rgba(24, 24, 27, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+html.ghd[data-color-mode='dark'] {
+  --ghd-bg: #151517;
+  --ghd-win: #1d1d1f;
+  --ghd-ink: #f5f5f7;
+  --ghd-muted: #a1a1aa;
+  --ghd-line: rgba(255, 255, 255, 0.07);
+  --ghd-hover: #2c2c2e;
+  --ghd-pill: #2c2c2e;
+  --ghd-skel: #2c2c2e;
+  --ghd-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07);
+}
+@media (prefers-color-scheme: dark) {
+  html.ghd[data-color-mode='auto'] {
+    --ghd-bg: #151517;
+    --ghd-win: #1d1d1f;
+    --ghd-ink: #f5f5f7;
+    --ghd-muted: #a1a1aa;
+    --ghd-line: rgba(255, 255, 255, 0.07);
+    --ghd-hover: #2c2c2e;
+    --ghd-pill: #2c2c2e;
+    --ghd-skel: #2c2c2e;
+    --ghd-shadow: 0 0 0 1px rgba(255, 255, 255, 0.07);
+  }
+}
+
+/* Keep GitHub's top bar (outside .application-main); hide the stock dashboard. */
+html.ghd .application-main > :not(#ghd) { display: none !important; }
+html.ghd body { background: var(--ghd-bg); }
+
+#ghd {
+  font-family: var(--fontStack-sansSerif);
+  color: var(--ghd-ink);
+  -webkit-font-smoothing: antialiased;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+#ghd *, #ghd *::before, #ghd *::after { box-sizing: border-box; }
+#ghd a { color: inherit; text-decoration: none; }
+#ghd :focus-visible { outline: 2px solid var(--ghd-accent); outline-offset: 2px; border-radius: 10px; }
+
+/* Greeting */
+.ghd-hero {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 0 32px;
+}
+.ghd-me {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--ghd-skel);
+  box-shadow: var(--ghd-shadow);
+}
+.ghd-me:not([src]) { visibility: hidden; }
+.ghd-hello {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+.ghd-sub { margin: 4px 0 0; font-size: 15px; color: var(--ghd-muted); }
+
+/* Cards */
+.ghd-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.ghd-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ghd-win);
+  border-radius: 24px;
+  box-shadow: var(--ghd-shadow);
+  overflow: hidden;
+  animation: ghd-arrive 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(var(--i) * 60ms);
+}
+@keyframes ghd-arrive {
+  from { opacity: 0; transform: translateY(8px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ghd-card { animation: none; }
+}
+
+.ghd-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 8px;
+}
+.ghd-head h2 { margin: 0; font-size: 16px; font-weight: 600; letter-spacing: -0.015em; }
+.ghd-count {
+  min-width: 24px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--ghd-pill);
+  color: var(--ghd-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.ghd-count:empty { visibility: hidden; }
+
+.ghd-body { max-height: 560px; overflow-y: auto; padding: 4px 12px 12px; overscroll-behavior: contain; }
+.ghd-body ul { list-style: none; margin: 0; padding: 0; }
+
+/* Rows */
+.ghd-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 10px;
+  border-radius: 14px;
+  transition: background-color 0.12s;
+}
+.ghd-row:hover { background: var(--ghd-hover); }
+.ghd-av {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin-top: 1px;
+  border-radius: 7px;
+  background: var(--ghd-skel);
+}
+.ghd-av.is-round { border-radius: 50%; }
+.ghd-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+/* Whole row is the link target. */
+.ghd-main::after { content: ''; position: absolute; inset: 0; border-radius: 14px; }
+.ghd-title { font-size: 14px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.ghd-owner { color: var(--ghd-muted); font-weight: 500; }
+.ghd-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ghd-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--ghd-muted); }
+.ghd-pill {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--ghd-pill);
+  font-weight: 500;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ghd-row:hover .ghd-pill { background: var(--ghd-win); }
+.ghd-pill.is-draft { color: var(--ghd-ink); }
+
+.ghd-star {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -2px -4px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--ghd-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.12s, transform 0.12s;
+}
+.ghd-star svg { fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linejoin: round; }
+.ghd-row:hover .ghd-star, .ghd-star:focus-visible, .ghd-star.is-on { opacity: 1; }
+.ghd-star.is-on { color: #febc2e; }
+.ghd-star.is-on svg { fill: currentColor; stroke: #e0a21e; }
+.ghd-star:active { transform: scale(0.85); }
+@media (hover: none) { .ghd-star { opacity: 1; } }
+
+.ghd-empty { margin: 0; padding: 32px 20px; text-align: center; font-size: 13px; color: var(--ghd-muted); text-wrap: balance; }
+
+/* Loading */
+.ghd-skel li { display: flex; gap: 12px; align-items: center; padding: 12px 10px; }
+.ghd-skel i, .ghd-skel b { background: var(--ghd-skel); animation: ghd-pulse 1.6s ease-in-out infinite; }
+.ghd-skel i { width: 24px; height: 24px; border-radius: 7px; }
+.ghd-skel b { height: 12px; border-radius: 6px; flex: 1; max-width: 70%; }
+.ghd-skel li:nth-child(even) b { max-width: 52%; }
+@keyframes ghd-pulse { 50% { opacity: 0.5; } }
+
+/* Footer */
+.ghd-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 24px 0 40px;
+  font-size: 12px;
+  color: var(--ghd-muted);
+}
+.ghd-reset { border: 0; background: none; padding: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.ghd-reset:hover { color: var(--ghd-ink); }
+
+/* Token form */
+.ghd-center { display: flex; justify-content: center; padding: 72px 0; }
+.ghd-token { width: min(440px, 100%); }
+.ghd-token .ghd-body { max-height: none; padding: 8px 24px 24px; display: flex; flex-direction: column; gap: 10px; }
+.ghd-lede { margin: 0 0 6px; font-size: 15px; line-height: 1.5; }
+.ghd-token label { font-size: 12px; font-weight: 600; color: var(--ghd-muted); }
+.ghd-token code { font-size: 11px; padding: 1px 5px; border-radius: 5px; background: var(--ghd-pill); }
+.ghd-token input {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--ghd-line);
+  border-radius: 12px;
+  background: var(--ghd-hover);
+  color: var(--ghd-ink);
+  font: inherit;
+  font-size: 14px;
+}
+.ghd-token input:focus { outline: 2px solid var(--ghd-accent); outline-offset: 1px; background: var(--ghd-win); }
+.ghd-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; font-size: 13px; }
+.ghd-actions a { color: var(--ghd-accent) !important; font-weight: 500; }
+.ghd-btn {
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ghd-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+.ghd-btn:hover { background: #0071e3; }
+.ghd-btn:active { transform: scale(0.96); }
+.ghd-error { margin: 0; padding: 10px 12px; border-radius: 12px; background: rgba(255, 95, 87, 0.12); color: #d93025; font-size: 13px; }
+.ghd-fine { margin: 4px 0 0; font-size: 12px; color: var(--ghd-muted); }
+
+@media (max-width: 900px) {
+  .ghd-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  #ghd { padding: 0 16px; }
+  .ghd-hello { font-size: 24px; }
+}

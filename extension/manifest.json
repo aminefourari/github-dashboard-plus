@@ -1,0 +1,35 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Dashboard+",
+  "version": "0.1.0",
+  "description": "Restyles github.com and replaces the dashboard with favorites, recently active repos, open PRs and issues.",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "lib.js",
+        "content.js"
+      ],
+      "css": [
+        "theme.css",
+        "dashboard.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/*.woff2"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ]
+    }
+  ]
+}
